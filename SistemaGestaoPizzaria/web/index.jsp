@@ -1,3 +1,4 @@
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <!--
@@ -5,10 +6,10 @@ To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
-<html>
+<html lang="pt-br">
 
 <head>
-    <title>TODO supply a title</title>
+    <title>SIGP :: Login</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!--     Fonts and icons     -->
@@ -41,7 +42,7 @@ and open the template in the editor.
                                         <div class="block block-four"></div>
                                         <a href="javascript:void(0)">
                                             <img class="avatar" src="assets/img/emilyz.jpg" alt="...">
-                                            <h5 class="title">Login de Usuário</h5>
+                                            <h5 class="title">Login de UsuÃ¡rio</h5>
                                         </a>
                                         <p class="description">
                                             Entre com as suas credenciais

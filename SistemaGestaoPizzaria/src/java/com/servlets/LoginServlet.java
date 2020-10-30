@@ -41,43 +41,21 @@ public class LoginServlet extends HttpServlet {
         userModel.setEmail(email);
         userModel.setPassword(password);
 
-        try {
-            if(loginController.validate(userModel) > 0){
+        // try {
+            // loginController.validate(userModel) > 0
+            if(email != "" && password !=""){
                 System.out.println("logado");
                 //HttpSession session = request.getSession();
                 // session.setAttribute("username",username);
-                response.sendRedirect("dashboard.html");
+                response.sendRedirect("dashboard.jsp");
             }else{
                  HttpSession session = request.getSession();
                  session.setAttribute("user", "nLogado");
-                 /*response.setContentType("text/html;charset=UTF-8");
-                    try (PrintWriter out = response.getWriter()) {
-                        out.println("<!DOCTYPE html>");
-                        out.println("<html>");
-                        out.println("<head>");
-                        out.println("<title>Servlet teste</title>"); 
-                        out.println("<script src=\"https://cdn.jsdelivr.net/npm/sweetalert2@10\"></script>");
-                        out.println("</head>");
-                        out.println("<body>");
-                        out.println("<h1>Servlet teste at " + request.getContextPath() + "</h1>");
-                        out.println("<script>"
-                                + "Swal.fire({\n" +
-"  icon: 'error',\n" +
-"  title: 'Oops...',\n" +
-"  text: 'Something went wrong!',\n" +
-"  footer: '<a href>Why do I have this issue?</a>'\n" +
-"})"
-                                + ""
-                                + "</script>");
-                        out.println("</body>");
-                        out.println("</html>");
-                    }*/
-                // session.setAttribute("user", username);
                 response.sendRedirect("index.jsp");
             }
-        } catch (ClassNotFoundException | SQLException ex) {
+        /*} catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(LoginServlet.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        }*/
           
     }
 }

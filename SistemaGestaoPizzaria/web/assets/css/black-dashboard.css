@@ -20443,3 +20443,56 @@ Copyright (c) 2015 Daniel Eden
 }
 
 /*# sourceMappingURL=dashboard-free.css.map */
+
+.btn-tiny{
+    padding: 6px!important
+}
+.modal-content {
+
+}
+.select-list {
+  font-family: "Open Sans", sans-serif;
+  color: #555;
+      border-color: #2b3553;
+  background: transparent;
+}
+.select-list .title {
+  display: inline-block;
+  cursor: pointer;
+  background-color: transparent;
+  width: 100%;
+  border: 1px solid #eaeaec;
+  border-radius: 5px;
+  padding: 10px 15px 10px 15px;
+  color: #fff;
+}
+.select-list .title::after {
+  display: inline-block;
+  content: ">";
+  margin-left: 85%;
+  font-size: 11px;
+  transform: rotate(90deg) scale(1, 2);
+    background-color: transparent;
+}
+.select-list .title:hover {
+    background-color: transparent;
+}
+.select-list .select-options {
+  margin-top: 5px;
+  display: none;
+  position: absolute;
+  z-index: 500;
+  border: 1px solid #eaeaec;
+  background-color: var(--gray-dark);
+  width: 100%;
+}
+.select-list .select-options .option label {
+  display: inline-block;
+  padding: 10px 30px 10px 10px;
+}
+.select-list .select-options .option:hover {
+  
+}
+.select-list .select-options .option input {
+  margin: 10px 0 12px 15px;
+}
