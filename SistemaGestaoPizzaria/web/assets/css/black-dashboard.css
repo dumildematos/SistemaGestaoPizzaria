@@ -20506,3 +20506,6 @@ Copyright (c) 2015 Daniel Eden
 .select-list .select-options .option input {
   margin: 10px 0 12px 15px;
 }
+h5.modal-title{
+    color: #fff!important;
+}

@@ -5,16 +5,72 @@
         <servlet-class>com.servlets.LoginServlet</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>ChangeSessionValueServlet</servlet-name>
-        <servlet-class>com.servlets.ChangeSessionValueServlet</servlet-class>
+        <servlet-name>AddFuncionario</servlet-name>
+        <servlet-class>com.servlets.AddFuncionario</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteFuncionario</servlet-name>
+        <servlet-class>com.servlets.DeleteFuncionario</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>getFuncionario</servlet-name>
+        <servlet-class>com.servlets.GetFuncionario</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EditFuncionario</servlet-name>
+        <servlet-class>com.servlets.EditFuncionario</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddCliente</servlet-name>
+        <servlet-class>com.servlets.AddCliente</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteCliente</servlet-name>
+        <servlet-class>com.servlets.DeleteCliente</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>GetCliente</servlet-name>
+        <servlet-class>com.servlets.GetCliente</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EditCliente</servlet-name>
+        <servlet-class>com.servlets.EditCliente</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/LoginServlet</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>ChangeSessionValueServlet</servlet-name>
-        <url-pattern>/ChangeSessionValueServlet</url-pattern>
+        <servlet-name>AddFuncionario</servlet-name>
+        <url-pattern>/AddFuncionario</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteFuncionario</servlet-name>
+        <url-pattern>/DeleteFuncionario</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>getFuncionario</servlet-name>
+        <url-pattern>/getFuncionario</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditFuncionario</servlet-name>
+        <url-pattern>/EditFuncionario</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddCliente</servlet-name>
+        <url-pattern>/AddCliente</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteCliente</servlet-name>
+        <url-pattern>/DeleteCliente</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GetCliente</servlet-name>
+        <url-pattern>/GetCliente</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditCliente</servlet-name>
+        <url-pattern>/EditCliente</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

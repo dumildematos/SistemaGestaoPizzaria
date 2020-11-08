@@ -41,21 +41,20 @@ public class LoginServlet extends HttpServlet {
         userModel.setEmail(email);
         userModel.setPassword(password);
 
-        // try {
-            // loginController.validate(userModel) > 0
-            if(email != "" && password !=""){
-                System.out.println("logado");
-                //HttpSession session = request.getSession();
-                // session.setAttribute("username",username);
-                response.sendRedirect("dashboard.jsp");
+         try {
+            if(loginController.validate(userModel) > 0){
+                // System.out.println("logado");
+                HttpSession session = request.getSession();
+                session.setAttribute("username",email);
+                response.sendRedirect("views/dashboard.jsp");
             }else{
                  HttpSession session = request.getSession();
                  session.setAttribute("user", "nLogado");
                 response.sendRedirect("index.jsp");
             }
-        /*} catch (ClassNotFoundException | SQLException ex) {
+        } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(LoginServlet.class.getName()).log(Level.SEVERE, null, ex);
-        }*/
+        }
           
     }
 }
