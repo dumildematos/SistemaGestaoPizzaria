@@ -5,9 +5,10 @@
  */
 package com.servlets;
 
-import com.controller.ClienteController;
-import com.model.ClienteModel;
+import com.controller.TipoPizzaController;
+import com.model.TipoPizzaModel;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -22,45 +23,42 @@ import javax.servlet.http.HttpSession;
  *
  * @author dumilde.matos
  */
-@WebServlet("/views/addCliente")
-public class AddCliente extends HttpServlet {
+@WebServlet("/views/EditTipoPizza")
+public class EditTipoPizza extends HttpServlet {
 
-    private ClienteController clienteCtrl;
-    
+    private TipoPizzaController tipoPizzaController;
+
     public void init() {
-        clienteCtrl = new ClienteController();
+        tipoPizzaController = new TipoPizzaController();
     }
+    
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-
-        String nome = request.getParameter("nome");
-        String telefone = request.getParameter("telefone");
-        String endereco = request.getParameter("endereco");
         
-        ClienteModel clienteModel = new ClienteModel();
-        clienteModel.setNome(nome);
-        clienteModel.setTelefone(telefone);
-        clienteModel.setEndereco(endereco);
-             
-            
-        if(nome != "" && telefone != "" && endereco != "" ){
+        String idTipoPizza = request.getParameter("idTipoPizza");
+        String nome = request.getParameter("tipo");
+        String preco = request.getParameter("preco");
+        
+        TipoPizzaModel tipoPizzaModel = new TipoPizzaModel();
+        tipoPizzaModel.setIdtipo_pizza(Integer.parseInt(idTipoPizza));
+        tipoPizzaModel.setNome(nome);
+        tipoPizzaModel.setPreco(preco);
+        
+            if(nome != "" && preco != ""){
             try {
-                clienteCtrl.Adicionar(clienteModel);
+                tipoPizzaController.Editar(tipoPizzaModel, Integer.parseInt(idTipoPizza));
             } catch (SQLException ex) {
                 Logger.getLogger(AddFuncionario.class.getName()).log(Level.SEVERE, null, ex);
-            } 
+            }
                 // System.out.println("logado");
                 HttpSession session = request.getSession();
-                session.setAttribute("insertStatus","inserido");
-                response.sendRedirect("clientes.jsp");
+                session.setAttribute("insertStatus","atualizado");
+                response.sendRedirect("pizzas.jsp");
         }else{
             HttpSession session = request.getSession();
-            session.setAttribute("insertStatus","nInserido");
-            response.sendRedirect("clientes.jsp");
+            session.setAttribute("insertStatus","nAtualizado");
+            response.sendRedirect("pizzas.jsp");
         }
-
-          
     }
-    
-
+   
 }

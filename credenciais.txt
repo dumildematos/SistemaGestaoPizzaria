@@ -1,0 +1,7 @@
+DB
+usuario: "root"
+senha: ""
+
+Login: 
+email: "admin@master.com"
+senha: "admin"

@@ -184,8 +184,8 @@ $(document).ready(function() {
       function eliminarRegistro(path, id){
 
           Swal.fire({
-            title: 'Você tem certeza?',
-            text: "Você não poderá reverter isso!",
+            title: 'VocÃª tem certeza?',
+            text: "VocÃª nÃ£o poderÃ¡ reverter isso!",
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
@@ -194,7 +194,7 @@ $(document).ready(function() {
           }).then((result) => {
             if (result.isConfirmed) {
                 var message = Swal.fire(
-                'Excluído!',
+                'ExcluÃ­do!',
                 'Seu registro foi deletado.',
                 'success'
               );
@@ -204,6 +204,10 @@ $(document).ready(function() {
                     });
                 }else if(path === '/clientes'){
                     $.get('${pageContext.request.contextPath}/views/DelCliente?idCliente='+id, function(data) {
+                        message();
+                    });
+                }else if(path === '/tiposPizza'){
+                    $.get('${pageContext.request.contextPath}/views/DelTipoPizza?idTipoPizza='+id, function(data) {
                         message();
                     });
                 }
@@ -224,6 +228,10 @@ $(document).ready(function() {
         }else if(path === '/clientes'){
             $.get('${pageContext.request.contextPath}/views/GetCliente?idCliente='+id, function(data) {
                  $('#editarFunciomarioModal').modal();
+            })
+        }else if(path === '/tiposPizza'){
+            $.get('${pageContext.request.contextPath}/views/GetTipoPizza?idTipoPizza='+id, function(data) {
+                 $('#editarTipoPizza').modal();
             })
         }
       }

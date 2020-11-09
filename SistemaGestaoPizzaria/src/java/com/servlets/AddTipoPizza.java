@@ -5,9 +5,10 @@
  */
 package com.servlets;
 
-import com.controller.ClienteController;
-import com.model.ClienteModel;
+import com.controller.TipoPizzaController;
+import com.model.TipoPizzaModel;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -22,45 +23,45 @@ import javax.servlet.http.HttpSession;
  *
  * @author dumilde.matos
  */
-@WebServlet("/views/addCliente")
-public class AddCliente extends HttpServlet {
+@WebServlet("/views/addTipoPizza")
+public class AddTipoPizza extends HttpServlet {
 
-    private ClienteController clienteCtrl;
+    private TipoPizzaController tipoPizzaController;
     
     public void init() {
-        clienteCtrl = new ClienteController();
+        tipoPizzaController = new TipoPizzaController();
     }
+    
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
 
         String nome = request.getParameter("nome");
-        String telefone = request.getParameter("telefone");
-        String endereco = request.getParameter("endereco");
+        String preco = request.getParameter("preco");
         
-        ClienteModel clienteModel = new ClienteModel();
-        clienteModel.setNome(nome);
-        clienteModel.setTelefone(telefone);
-        clienteModel.setEndereco(endereco);
+        TipoPizzaModel tipoPizzaModel = new TipoPizzaModel();
+        tipoPizzaModel.setNome(nome);
+        tipoPizzaModel.setPreco(preco);
              
             
-        if(nome != "" && telefone != "" && endereco != "" ){
+        if(nome != "" && preco != ""){
             try {
-                clienteCtrl.Adicionar(clienteModel);
+                tipoPizzaController.Adicionar(tipoPizzaModel);
             } catch (SQLException ex) {
                 Logger.getLogger(AddFuncionario.class.getName()).log(Level.SEVERE, null, ex);
             } 
                 // System.out.println("logado");
                 HttpSession session = request.getSession();
                 session.setAttribute("insertStatus","inserido");
-                response.sendRedirect("clientes.jsp");
+                response.sendRedirect("pizzas.jsp");
         }else{
             HttpSession session = request.getSession();
             session.setAttribute("insertStatus","nInserido");
-            response.sendRedirect("clientes.jsp");
+            response.sendRedirect("pizzas.jsp");
         }
 
           
     }
+
     
 
 }

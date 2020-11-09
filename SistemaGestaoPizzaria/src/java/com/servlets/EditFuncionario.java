@@ -48,7 +48,7 @@ public class EditFuncionario extends HttpServlet {
         funcionarioModel.setTelefone(telefone);
         funcionarioModel.setN_contrato(nContrato);
         
-            if(nome != "" || funcao != "" || telefone != "" || nContrato != ""){
+            if(nome != "" && funcao != "" && telefone != "" && nContrato != ""){
             try {
                 funcionarioController.Editar(funcionarioModel, Integer.parseInt(idFornecedor));
             } catch (SQLException ex) {

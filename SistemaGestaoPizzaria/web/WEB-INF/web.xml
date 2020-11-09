@@ -36,6 +36,22 @@
         <servlet-name>EditCliente</servlet-name>
         <servlet-class>com.servlets.EditCliente</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AddTipoPizza</servlet-name>
+        <servlet-class>com.servlets.AddTipoPizza</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteTipoPizza</servlet-name>
+        <servlet-class>com.servlets.DeleteTipoPizza</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>GetTipoPizza</servlet-name>
+        <servlet-class>com.servlets.GetTipoPizza</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EditTipoPizza</servlet-name>
+        <servlet-class>com.servlets.EditTipoPizza</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/LoginServlet</url-pattern>
@@ -71,6 +87,22 @@
     <servlet-mapping>
         <servlet-name>EditCliente</servlet-name>
         <url-pattern>/EditCliente</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddTipoPizza</servlet-name>
+        <url-pattern>/AddTipoPizza</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteTipoPizza</servlet-name>
+        <url-pattern>/DeleteTipoPizza</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GetTipoPizza</servlet-name>
+        <url-pattern>/GetTipoPizza</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditTipoPizza</servlet-name>
+        <url-pattern>/EditTipoPizza</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

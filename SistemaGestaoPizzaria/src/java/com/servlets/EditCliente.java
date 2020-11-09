@@ -48,7 +48,7 @@ public class EditCliente extends HttpServlet {
         clienteModel.setTelefone(telefone);
         clienteModel.setEndereco(endereco);
         
-            if(nome != "" || telefone != "" || telefone != "" || endereco != ""){
+            if(nome != "" && telefone != "" && telefone != "" && endereco != ""){
             try {
                 clienteCtrl.Editar(clienteModel, Integer.parseInt(idCliente));
             } catch (SQLException ex) {

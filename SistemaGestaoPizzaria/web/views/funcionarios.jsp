@@ -207,11 +207,11 @@
                 <form action="EditFuncionario" method="POST">
                 
                    <div class="row">
-                    <input type="hidden" name="idFornecedor" value="<%= session.getAttribute("eidtarUserId") %>">
+                    <input type="hidden" name="idFornecedor" value="<%= session.getAttribute("eidtarUserId") != null ? session.getAttribute("eidtarUserId"): null %>">
                     <div class="col-md-12 px-md-1">
                       <div class="form-group"> 
-                          <label>Nome</label>   ID : <%= session.getAttribute("eidtarUserId") %>  
-                        <input type="text" name="nome" class="form-control" placeholder="Nome " value="<%= funcDAO.getFuncionario(Integer.parseInt(session.getAttribute("eidtarUserId").toString())).getNome() %>">
+                          <label>Nome</label>   ID : <%= session.getAttribute("eidtarUserId") != null ? session.getAttribute("eidtarUserId") : null %>  
+                        <input type="text" name="nome" class="form-control" placeholder="Nome " value="<%= session.getAttribute("eidtarUserId") != null ? funcDAO.getFuncionario(Integer.parseInt(session.getAttribute("eidtarUserId").toString())).getNome(): "" %>">
                       </div>
                     </div>
                   </div>
@@ -220,7 +220,7 @@
                     <div class="col-md-12 px-md-1">
                       <div class="form-group">
                         <label>Função</label>
-                        <input type="text" name="funcao" class="form-control" placeholder="Função" value="<%= funcDAO.getFuncionario(Integer.parseInt(session.getAttribute("eidtarUserId").toString())).getFuncao()%>">
+                        <input type="text" name="funcao" class="form-control" placeholder="Função" value="<%= session.getAttribute("eidtarUserId") != null ? funcDAO.getFuncionario(Integer.parseInt(session.getAttribute("eidtarUserId").toString())).getFuncao() : "" %>">
                       </div>
                     </div>
                   </div>
@@ -229,7 +229,7 @@
                     <div class="col-md-12 px-md-1">
                       <div class="form-group">
                         <label>Telefone</label>
-                        <input type="text" name="telefone" class="form-control" placeholder="Telefone" value="<%= funcDAO.getFuncionario(Integer.parseInt(session.getAttribute("eidtarUserId").toString())).getTelefone() %>" minlength="9" maxlength="9">
+                        <input type="text" name="telefone" class="form-control" placeholder="Telefone" value="<%= session.getAttribute("eidtarUserId") != null ? funcDAO.getFuncionario(Integer.parseInt(session.getAttribute("eidtarUserId").toString())).getTelefone(): "" %>" minlength="9" maxlength="9">
                       </div>
                     </div>
                   </div>
@@ -238,7 +238,7 @@
                     <div class="col-md-12 px-md-1">
                       <div class="form-group">
                         <label>Nº do Contrato</label>
-                        <input type="text" name="nContrato" class="form-control" placeholder="Contrato" value="<%= funcDAO.getFuncionario(Integer.parseInt(session.getAttribute("eidtarUserId").toString())).getN_contrato()%>">
+                        <input type="text" name="nContrato" class="form-control" placeholder="Contrato" value="<%= session.getAttribute("eidtarUserId") != null ? funcDAO.getFuncionario(Integer.parseInt(session.getAttribute("eidtarUserId").toString())).getN_contrato() : "" %>">
                       </div>
                     </div>
                   </div 

@@ -203,11 +203,11 @@
               <div class="card-body">
                   <form action="EditCliente" method="POST">
                   <div class="row">
-                      <input type="hidden" name="idCliente" value="<%= session.getAttribute("eidtarUserId") %>">
+                      <input type="hidden" name="idCliente" value="<%= session.getAttribute("eidtarUserId") != null ? session.getAttribute("eidtarUserId"): null %>">
                     <div class="col-md-12 px-md-1">
                       <div class="form-group">
                         <label>Nome</label> ID : <%= session.getAttribute("eidtarUserId") %>
-                        <input type="text" name="nome" class="form-control" placeholder="Nome do cliente" value="<%= clientDAO.getCliente(Integer.parseInt(session.getAttribute("eidtarUserId").toString())).getNome() %>">
+                        <input type="text" name="nome" class="form-control" placeholder="Nome do cliente" value="<%= session.getAttribute("eidtarUserId") != null ? clientDAO.getCliente(Integer.parseInt(session.getAttribute("eidtarUserId").toString())).getNome() : "" %>">
                       </div>
                     </div>
                   </div>
@@ -215,7 +215,7 @@
                     <div class="col-md-12 px-md-1">
                       <div class="form-group">
                         <label>Telefone</label>
-                        <input type="text" name="telefone" minlength="9" maxlength="9" value="<%= clientDAO.getCliente(Integer.parseInt(session.getAttribute("eidtarUserId").toString())).getTelefone() %>" class="form-control" placeholder="Número de Telefone">
+                        <input type="text" name="telefone" minlength="9" maxlength="9" value="<%= session.getAttribute("eidtarUserId") != null ? clientDAO.getCliente(Integer.parseInt(session.getAttribute("eidtarUserId").toString())).getTelefone(): "" %>" class="form-control" placeholder="Número de Telefone">
                       </div>
                     </div>
                   </div>
@@ -223,7 +223,7 @@
                     <div class="col-md-12 px-md-1">
                       <div class="form-group">
                         <label>Endereco</label>
-                        <input type="text" name="endereco" value="<%= clientDAO.getCliente(Integer.parseInt(session.getAttribute("eidtarUserId").toString())).getEndereco() %>" class="form-control" placeholder="Endereço">
+                        <input type="text" name="endereco" value="<%= session.getAttribute("eidtarUserId") != null ? clientDAO.getCliente(Integer.parseInt(session.getAttribute("eidtarUserId").toString())).getEndereco(): "" %>" class="form-control" placeholder="Endereço">
                       </div>
                     </div>
                   </div>
