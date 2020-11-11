@@ -13,6 +13,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.sql.*;
 
 /**
  *
@@ -24,21 +25,32 @@ public class PizzaController {
     
         Connection con = ConnectionEntity.openConection();
         PreparedStatement stmt = null;
+        ResultSet rs = null;
+        int pizzaId = 0;
         
          try{
-            stmt = con.prepareStatement("insert into pizza (nome,ingredientes, tipo_pizza_idtipo_pizza) values(?,?,?)");
-                        
+            String insertInPizza = "insert into pizza (nome,ingredientes) values(?,?)";
+            stmt = con.prepareStatement(insertInPizza,Statement.RETURN_GENERATED_KEYS);
             stmt.setString(1, pizzaModel.getNome());
             stmt.setString(2, pizzaModel.getIngredientes());
-            stmt.setInt(3, pizzaModel.getTipo_pizza_idtipo_pizza());
-
-            
+            // stmt.setInt(3, pizzaModel.getTipo_pizza_idtipo_pizza());
             stmt.executeUpdate();
-            // JOptionPane.showMessageDialog(null, "Funcionario adicionado com sucesso");
-        }catch(SQLException ex){
-            System.out.println(ex);
-            // JOptionPane.showMessageDialog(null, "Erro ao cadastrar "+ex); 
+            rs = stmt.getGeneratedKeys();
+            while (rs.next()) {
+                pizzaId = rs.getInt(1);
+                if(pizzaId > 0){
+                    String insertInTipo_pizza_has_pizza = "insert into tipo_pizza_has_pizza (tipo_pizza_idtipo_pizza,pizza_idpizza) values (?,?);";
+                    stmt = con.prepareStatement(insertInTipo_pizza_has_pizza);
+                    stmt.setInt(1, pizzaId);
+                    stmt.setInt(2, 2);
+                    stmt.executeUpdate();
+                }
+            }
             
+            // System.out.println("id retornado "+pizzaId);
+
+        }catch(SQLException ex){
+            System.out.println(ex);            
         }finally{
             ConnectionEntity.closeConnection(con, stmt);
         }
@@ -93,7 +105,7 @@ public class PizzaController {
         ResultSet rs = null;
         
         ArrayList<PizzaModel> list = new ArrayList<>();
-        String sql = "select pizza.idpizza, pizza.nome, pizza.ingredientes, tipo_pizza.tipo, tipo_pizza.preco from pizza inner join tipo_pizza where pizza.tipo_pizza_idtipo_pizza = tipo_pizza.idtipo_pizza";
+        String sql = "select distinct p.idpizza, p.nome, p.ingredientes, tPizza.tipo ,tPizza.preco from pizza as p  inner join tipo_pizza as tPizza";
         try {
             Connection con = ConnectionEntity.openConection();
             stmt = con.prepareStatement(sql);
