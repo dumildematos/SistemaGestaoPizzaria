@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 09-Nov-2020 às 17:45
+-- Tempo de geração: 11-Nov-2020 às 13:26
 -- Versão do servidor: 10.4.11-MariaDB
 -- versão do PHP: 7.4.4
 
@@ -30,7 +30,17 @@ SET time_zone = "+00:00";
 CREATE TABLE `cardapio` (
   `idcardapio` int(11) NOT NULL,
   `nome` varchar(45) DEFAULT NULL,
-  `data` varchar(45) DEFAULT NULL,
+  `data` varchar(45) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `cardapio_has_pizza`
+--
+
+CREATE TABLE `cardapio_has_pizza` (
+  `cardapio_idcardapio` int(11) NOT NULL,
   `pizza_idpizza` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -52,7 +62,9 @@ CREATE TABLE `cliente` (
 --
 
 INSERT INTO `cliente` (`idcliente`, `nome`, `telefone`, `endereco`) VALUES
-(1, 'dfgdfg', 'dfgdfgdff', 'gdfgdfg');
+(1, 'Emilia da GraÃ§a', '938935454', 'fgdfhfghfg'),
+(2, 'Bome ', '221212121', '75675675'),
+(3, 'Helder', '5t7567567', '45646456');
 
 -- --------------------------------------------------------
 
@@ -73,8 +85,7 @@ CREATE TABLE `funcionario` (
 --
 
 INSERT INTO `funcionario` (`idfuncionario`, `n_contrato`, `nome`, `funcao`, `telefone`) VALUES
-(1, '000AP0000', 'Admim Master', 'admin', '000000000'),
-(2, 'fgdfgdfgdf', 'fgdfg', 'dfgdfgdf', 'gdfgdfgd6');
+(1, '000POA', 'Dumilde Matos', 'Admin', '000000000');
 
 -- --------------------------------------------------------
 
@@ -100,18 +111,18 @@ CREATE TABLE `pedido` (
 
 CREATE TABLE `pizza` (
   `idpizza` int(11) NOT NULL,
-  `nome` varchar(45) DEFAULT NULL,
-  `ingredientes` varchar(45) DEFAULT NULL,
-  `tipo_pizza_idtipo_pizza` int(11) NOT NULL
+  `nome` varchar(45) NOT NULL,
+  `ingredientes` varchar(45) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Extraindo dados da tabela `pizza`
 --
 
-INSERT INTO `pizza` (`idpizza`, `nome`, `ingredientes`, `tipo_pizza_idtipo_pizza`) VALUES
-(3, 'Test', 'erwertw', 4),
-(4, 'fgdfgdfgdfg', 'dfgdfgdfg', 5);
+INSERT INTO `pizza` (`idpizza`, `nome`, `ingredientes`) VALUES
+(1, 'Teste', 'Tessste, ingredientes'),
+(3, 'nome', 'ingredientes'),
+(18, 'fgdfgd', 'fgdfgdfgdfgdfg');
 
 -- --------------------------------------------------------
 
@@ -121,8 +132,8 @@ INSERT INTO `pizza` (`idpizza`, `nome`, `ingredientes`, `tipo_pizza_idtipo_pizza
 
 CREATE TABLE `tipo_pizza` (
   `idtipo_pizza` int(11) NOT NULL,
-  `tipo` varchar(45) DEFAULT NULL,
-  `preco` varchar(45) DEFAULT NULL
+  `tipo` varchar(45) NOT NULL,
+  `preco` varchar(45) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -130,8 +141,18 @@ CREATE TABLE `tipo_pizza` (
 --
 
 INSERT INTO `tipo_pizza` (`idtipo_pizza`, `tipo`, `preco`) VALUES
-(4, 'Grande', '456.45,645'),
-(5, 'Media', '4534,576');
+(1, 'Teste', '765756');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `tipo_pizza_has_pizza`
+--
+
+CREATE TABLE `tipo_pizza_has_pizza` (
+  `tipo_pizza_idtipo_pizza` int(11) NOT NULL,
+  `pizza_idpizza` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -148,13 +169,6 @@ CREATE TABLE `utilizador` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Extraindo dados da tabela `utilizador`
---
-
-INSERT INTO `utilizador` (`idutilizador`, `email`, `senha`, `funcionario_idfuncionario`, `tp_user`) VALUES
-(1, 'admin@master.com', 'admin', 1, 'admin');
-
---
 -- Índices para tabelas despejadas
 --
 
@@ -162,9 +176,16 @@ INSERT INTO `utilizador` (`idutilizador`, `email`, `senha`, `funcionario_idfunci
 -- Índices para tabela `cardapio`
 --
 ALTER TABLE `cardapio`
-  ADD PRIMARY KEY (`idcardapio`,`pizza_idpizza`),
-  ADD UNIQUE KEY `idcardapio_UNIQUE` (`idcardapio`),
-  ADD KEY `fk_cardapio_pizza1_idx` (`pizza_idpizza`);
+  ADD PRIMARY KEY (`idcardapio`),
+  ADD UNIQUE KEY `idcardapio_UNIQUE` (`idcardapio`);
+
+--
+-- Índices para tabela `cardapio_has_pizza`
+--
+ALTER TABLE `cardapio_has_pizza`
+  ADD PRIMARY KEY (`cardapio_idcardapio`,`pizza_idpizza`),
+  ADD KEY `fk_cardapio_has_pizza_pizza1_idx` (`pizza_idpizza`),
+  ADD KEY `fk_cardapio_has_pizza_cardapio1_idx` (`cardapio_idcardapio`);
 
 --
 -- Índices para tabela `cliente`
@@ -195,8 +216,7 @@ ALTER TABLE `pedido`
 --
 ALTER TABLE `pizza`
   ADD PRIMARY KEY (`idpizza`),
-  ADD UNIQUE KEY `idpizza_UNIQUE` (`idpizza`),
-  ADD KEY `fk_pizza_tipo_pizza1_idx` (`tipo_pizza_idtipo_pizza`);
+  ADD UNIQUE KEY `idpizza_UNIQUE` (`idpizza`);
 
 --
 -- Índices para tabela `tipo_pizza`
@@ -204,6 +224,14 @@ ALTER TABLE `pizza`
 ALTER TABLE `tipo_pizza`
   ADD PRIMARY KEY (`idtipo_pizza`),
   ADD UNIQUE KEY `idtipo_pizza_UNIQUE` (`idtipo_pizza`);
+
+--
+-- Índices para tabela `tipo_pizza_has_pizza`
+--
+ALTER TABLE `tipo_pizza_has_pizza`
+  ADD PRIMARY KEY (`tipo_pizza_idtipo_pizza`,`pizza_idpizza`),
+  ADD KEY `fk_tipo_pizza_has_pizza_pizza1_idx` (`pizza_idpizza`),
+  ADD KEY `fk_tipo_pizza_has_pizza_tipo_pizza1_idx` (`tipo_pizza_idtipo_pizza`);
 
 --
 -- Índices para tabela `utilizador`
@@ -227,13 +255,13 @@ ALTER TABLE `cardapio`
 -- AUTO_INCREMENT de tabela `cliente`
 --
 ALTER TABLE `cliente`
-  MODIFY `idcliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `idcliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de tabela `funcionario`
 --
 ALTER TABLE `funcionario`
-  MODIFY `idfuncionario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `idfuncionario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de tabela `pedido`
@@ -245,43 +273,45 @@ ALTER TABLE `pedido`
 -- AUTO_INCREMENT de tabela `pizza`
 --
 ALTER TABLE `pizza`
-  MODIFY `idpizza` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `idpizza` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT de tabela `tipo_pizza`
 --
 ALTER TABLE `tipo_pizza`
-  MODIFY `idtipo_pizza` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `idtipo_pizza` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de tabela `utilizador`
 --
 ALTER TABLE `utilizador`
-  MODIFY `idutilizador` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `idutilizador` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- Restrições para despejos de tabelas
 --
 
 --
--- Limitadores para a tabela `cardapio`
+-- Limitadores para a tabela `cardapio_has_pizza`
 --
-ALTER TABLE `cardapio`
-  ADD CONSTRAINT `fk_cardapio_pizza1` FOREIGN KEY (`pizza_idpizza`) REFERENCES `pizza` (`idpizza`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+ALTER TABLE `cardapio_has_pizza`
+  ADD CONSTRAINT `fk_cardapio_has_pizza_cardapio1` FOREIGN KEY (`cardapio_idcardapio`) REFERENCES `cardapio` (`idcardapio`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_cardapio_has_pizza_pizza1` FOREIGN KEY (`pizza_idpizza`) REFERENCES `pizza` (`idpizza`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Limitadores para a tabela `pedido`
 --
 ALTER TABLE `pedido`
-  ADD CONSTRAINT `fk_pedido_cardapio1` FOREIGN KEY (`cardapio_idcardapio`,`cardapio_pizza_idpizza`) REFERENCES `cardapio` (`idcardapio`, `pizza_idpizza`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_pedido_cardapio1` FOREIGN KEY (`cardapio_idcardapio`) REFERENCES `cardapio` (`idcardapio`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_pedido_cliente1` FOREIGN KEY (`cliente_idcliente`) REFERENCES `cliente` (`idcliente`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_pedido_funcionario` FOREIGN KEY (`funcionario_idfuncionario`) REFERENCES `funcionario` (`idfuncionario`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Limitadores para a tabela `pizza`
+-- Limitadores para a tabela `tipo_pizza_has_pizza`
 --
-ALTER TABLE `pizza`
-  ADD CONSTRAINT `fk_pizza_tipo_pizza1` FOREIGN KEY (`tipo_pizza_idtipo_pizza`) REFERENCES `tipo_pizza` (`idtipo_pizza`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+ALTER TABLE `tipo_pizza_has_pizza`
+  ADD CONSTRAINT `fk_tipo_pizza_has_pizza_pizza1` FOREIGN KEY (`pizza_idpizza`) REFERENCES `pizza` (`idpizza`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_tipo_pizza_has_pizza_tipo_pizza1` FOREIGN KEY (`tipo_pizza_idtipo_pizza`) REFERENCES `tipo_pizza` (`idtipo_pizza`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Limitadores para a tabela `utilizador`
