@@ -119,7 +119,7 @@
 				<div id="content" class="content">
 						<div class="row" style="padding: 5px!important;">
 								<div class="col-md-12">
-											<button type="submit" class="btn btn-fill btn-primary" data-toggle="modal"  data-target="#adicionarModal" style="float: right;">Adicionar Pizzas</button>
+											<button type="submit" class="btn btn-fill btn-primary" data-toggle="modal"  data-target="#adicionarPizzaModal" style="float: right;">Adicionar Pizzas</button>
 								</div>
 						</div>
 					<div class="row">
@@ -165,8 +165,8 @@
 													<td><%= pizza.getIngredientes()%></td>
 													<td class="text-center"><%= pizza.getPreco()%> Kz</td> 
 													<td class="text-center">
-														<button type="submit" class="btn btn-fill btn-primary btn-tiny" data-toggle="modal"  data-target="#editarModal"><i class="tim-icons icon-pencil"></i></button>
-														<button type="submit" class="btn btn-fill btn-primary btn-tiny" onclick="eliminarRegistro()"><i class="tim-icons icon-trash-simple"></i></button>
+														<button type="submit" class="btn btn-fill btn-primary btn-tiny" data-toggle="modal"  data-target="#editarPizzaModal" onclick="editarFuncionario('/pizzas',<%=pizza.getIdpizza()%>) "><i class="tim-icons icon-pencil"></i></button>
+														<button type="submit" class="btn btn-fill btn-primary btn-tiny" onclick="eliminarRegistro('/pizzas',<%=pizza.getIdpizza()%>)"><i class="tim-icons icon-trash-simple"></i></button>
 													</td>
 												</tr>
                                                                                                 <%}%>
@@ -248,12 +248,12 @@
 		</div>
 	
 			<!-- Modal -->
-	<div class="modal fade" id="editarModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal fade" id="editarPizzaModal" tabindex="-1" data-backdrop="static" aria-labelledby="exampleModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
 			<div class="modal-content card">
 				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLabel">Editar Cardapio</h5>
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<h5 class="modal-title" id="exampleModalLabel">Editar Pizza</h5>
+					<button type="button" class="close" onclick="refresh()" data-dismiss="modal" aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
 				</div>
@@ -262,54 +262,53 @@
 						<div class="col-md-12">
 							<div class="card">
 								<div class="card-body">
-									<form>
+									<form action="EditPizza" method="POST">
 										<div class="row">
+                                                                                    <input type="hidden" name="idPizza" value="<%= session.getAttribute("eidtarUserId") != null ? session.getAttribute("eidtarUserId"): null %>">
 											<div class="col-md-12 px-md-1">
 												<div class="form-group">
-													<label>Nome</label>
-													<input type="text" class="form-control" placeholder="Nome do cliente">
+													<label>Nome</label>  ID : <%= session.getAttribute("eidtarUserId") != null ?  session.getAttribute("eidtarUserId"): null %>
+                                                                                                        <input type="text" name="nome" class="form-control" placeholder="Nome da pizza" value="<%= session.getAttribute("eidtarUserId") != null ? pizzaDAO.getPizza(Integer.parseInt(session.getAttribute("eidtarUserId").toString())).getNome() : null %>">
 												</div>
 											</div>
 										</div>
-										<!--div class="row">
+										<div class="row">
 											<div class="col-md-12 pl-md-1">
 												<div class="form-group">
-													<label for="exampleInputEmail1">Data</label>
-													<input type="date" class="form-control">
+													<label>Ingredientes</label>
+													<textarea name="ingredientes" rows="4" cols="80" class="form-control" placeholder="Escreva aqui!" ><%= session.getAttribute("eidtarUserId") != null ? pizzaDAO.getPizza(Integer.parseInt(session.getAttribute("eidtarUserId").toString())).getIngredientes(): null %></textarea>
 												</div>
 											</div>
-										</div-->
+										</div>
 										<div class="row">
 											<div class="col-md-12 px-md-1">
 												<div class="select-list">
 		<div class="title">Pizzas</div>
 		<div class="select-options">
+                     <%
+                        TipoPizzaDAO tiposPizzaEditarDAO = new TipoPizzaDAO();
+                        List<TipoPizzaModel> listTipsoSelectEditar = tiposPizzaEditarDAO.getListaTipoPizza();
+                        Iterator<TipoPizzaModel> xIterator = listTipsoSelectEditar.iterator();
+                        TipoPizzaModel tiposPizzaEditar = null;
+                        while (xIterator.hasNext()) {
+											tiposPizzaEditar = xIterator.next();
+                        %>
 			<div class="option"> 
-					<input type="checkbox" name="vehicle" id="option1" value="" />
-					<label for="option1">Platform</label>
+                            <input type="radio" name="tipoPizzaId" id="option1" value="<%= tiposPizzaEditar.getIdtipo_pizza()%>" required/>
+                            <label for="option"><%= tiposPizzaEditar.getNome() %></label>
 			</div>
-			<div class="option"> 
-					<input type="checkbox" name="vehicle" id="option2" />
-					<label for="option2">Device ID</label>
-			</div>
-					<div class="option"> 
-					<input type="checkbox" name="vehicle" id="option3" />
-					<label for="option3">Token</label>
-			</div>
-					<div class="option"> 
-					<input type="checkbox" name="vehicle" id="option4" />
-					<label for="option4">Option 1</label>
-			</div>
+			   <%}%>
 		</div>
 	</div>
 											</div>
 										</div>
-									</form>
-								</div>
-								<div class="card-footer">
+                		<div class="card-footer">
 									
-									<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-					<button type="button" class="btn btn-primary">Adicionar</button
+									<button type="button" onclick="refresh()" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+					<button type="submit" class="btn btn-primary">Adicionar</button>
+								</div>
+							</div>
+									</form>
 								</div>
 							</div>
 						</div>
@@ -380,33 +379,32 @@
 					</button>
 				</div>
 				<div class="modal-body">
-                                            <div class="row">
+							<div class="row">
 						<div class="col-md-12">
 							<div class="card">
 								<div class="card-body">
-                                                                    <form action="EditTipoPizza" method="POST">
+											<form action="EditTipoPizza" method="POST">
 										<div class="row">
-                                                                                     <input type="hidden" name="idTipoPizza" value="<%= session.getAttribute("eidtarUserId") != null ? session.getAttribute("eidtarUserId"): null %>">
+											<input type="hidden" name="idTipoPizza" value="<%= session.getAttribute("eidtarUserId") != null ? session.getAttribute("eidtarUserId"): null %>">
 											<div class="col-md-12 px-md-1">
 												<div class="form-group">
-													<label>Nome</label> ID : <%= session.getAttribute("eidtarUserId") %>
-                                                                                                        <input type="text" name="tipo" class="form-control" value="<%= session.getAttribute("eidtarUserId") != null ? tipoPizzaDAO.getTipoPizza(Integer.parseInt(session.getAttribute("eidtarUserId").toString())).getNome(): "" %>" placeholder="Tipo de Pizza">
+													<label>Nome</label> ID : <%= session.getAttribute("eidtarUserId") != null ?  session.getAttribute("eidtarUserId"): null %>
+													<input type="text" name="tipo" class="form-control" value="<%= session.getAttribute("eidtarUserId") != null ? tipoPizzaDAO.getTipoPizza(Integer.parseInt(session.getAttribute("eidtarUserId").toString())).getNome(): "" %>" placeholder="Tipo de Pizza">
 												</div>
 											</div>
 										</div>
-                                                                                <div class="row">
+										<div class="row">
 											<div class="col-md-12 px-md-1">
 												<div class="form-group">
 													<label>Preco</label>
-                                                                                                        <input type="text" name="preco" class="form-control" value="<%= session.getAttribute("eidtarUserId") != null ? tipoPizzaDAO.getTipoPizza(Integer.parseInt(session.getAttribute("eidtarUserId").toString())).getPreco(): "" %>" placeholder="Tipo de Pizza">
+													<input type="text" name="preco" class="form-control" value="<%= session.getAttribute("eidtarUserId") != null ? tipoPizzaDAO.getTipoPizza(Integer.parseInt(session.getAttribute("eidtarUserId").toString())).getPreco(): "" %>" placeholder="Tipo de Pizza">
 												</div>
 											</div>
+										</div>                                                     
+										<div class="card-footer">
+											<button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="refresh()">Cancelar</button>
+											<button type="submit" class="btn btn-primary">Adicionar</button>
 										</div>
-                                                                                                
-                                                                            <div class="card-footer">
-                                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="refresh()">Cancelar</button>
-                                                                                <button type="submit" class="btn btn-primary">Adicionar</button
-                                                                            </div>
 									</form>
 								</div>
 			
@@ -420,11 +418,11 @@
 	</div>
 
 					<!-- Modal -->
-	<div class="modal fade" id="adicionarModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal fade" id="adicionarPizzaModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
 			<div class="modal-content card">
 				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLabel">Adicionar Cardapio</h5>
+					<h5 class="modal-title" id="exampleModalLabel">Adicionar Pizza</h5>
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>

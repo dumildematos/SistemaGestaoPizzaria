@@ -240,31 +240,7 @@
                       </div>
                     </div>
                   </div>
-                  <div class="row">
-                    <div class="col-md-12 px-md-1">
-                      <div class="select-list">
-  <div class="title">Pizzas</div>
-  <div class="select-options">
-    <div class="option"> 
-        <input type="checkbox" name="vehicle" id="option1" value="" />
-        <label for="option1">Platform</label>
-    </div>
-     <div class="option"> 
-        <input type="checkbox" name="vehicle" id="option2" />
-        <label for="option2">Device ID</label>
-    </div>
-        <div class="option"> 
-        <input type="checkbox" name="vehicle" id="option3" />
-        <label for="option3">Token</label>
-    </div>
-        <div class="option"> 
-        <input type="checkbox" name="vehicle" id="option4" />
-        <label for="option4">Option 1</label>
-    </div>
-  </div>
-</div>
-                    </div>
-                  </div>
+
                 </form>
               </div>
               <div class="card-footer">
@@ -313,31 +289,7 @@
                       </div>
                     </div>
                   </div>
-                  <div class="row">
-                    <div class="col-md-12 px-md-1">
-                      <div class="select-list">
-  <div class="title">Pizzas</div>
-  <div class="select-options">
-    <div class="option"> 
-        <input type="checkbox" name="vehicle" id="option1" value="" />
-        <label for="option1">Platform</label>
-    </div>
-     <div class="option"> 
-        <input type="checkbox" name="vehicle" id="option2" />
-        <label for="option2">Device ID</label>
-    </div>
-        <div class="option"> 
-        <input type="checkbox" name="vehicle" id="option3" />
-        <label for="option3">Token</label>
-    </div>
-        <div class="option"> 
-        <input type="checkbox" name="vehicle" id="option4" />
-        <label for="option4">Option 1</label>
-    </div>
-  </div>
-</div>
-                    </div>
-                  </div>
+                  
                 </form>
               </div>
               <div class="card-footer">

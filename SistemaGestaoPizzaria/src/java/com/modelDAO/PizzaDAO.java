@@ -37,7 +37,7 @@ public class PizzaDAO implements PizzaInterface {
         PizzaController pizzaCtrl = new PizzaController();
 
         try {
-            pizzaModel = pizzaCtrl.getTipoPizzaById(id);
+            pizzaModel = pizzaCtrl.getPizzaById(id);
         } catch (SQLException ex) {
             Logger.getLogger(FuncionarioDAO.class.getName()).log(Level.SEVERE, null, ex);
         }

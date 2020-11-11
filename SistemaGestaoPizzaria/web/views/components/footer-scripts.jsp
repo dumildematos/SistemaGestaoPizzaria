@@ -210,6 +210,10 @@ $(document).ready(function() {
                     $.get('${pageContext.request.contextPath}/views/DelTipoPizza?idTipoPizza='+id, function(data) {
                         message();
                     });
+                }else if(path === '/pizzas'){
+                    $.get('${pageContext.request.contextPath}/views/DelPizza?idPizza='+id, function(data) {
+                          message();
+                    })
                 }
                 
                 
@@ -232,6 +236,10 @@ $(document).ready(function() {
         }else if(path === '/tiposPizza'){
             $.get('${pageContext.request.contextPath}/views/GetTipoPizza?idTipoPizza='+id, function(data) {
                  $('#editarTipoPizza').modal();
+            })
+        }else if(path === '/pizzas'){
+            $.get('${pageContext.request.contextPath}/views/GetPizza?idPizza='+id, function(data) {
+                 $('#editarPizzaModal').modal();
             })
         }
       }

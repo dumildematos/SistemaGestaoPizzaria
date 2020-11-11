@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 11-Nov-2020 às 13:26
+-- Tempo de geração: 11-Nov-2020 às 19:19
 -- Versão do servidor: 10.4.11-MariaDB
 -- versão do PHP: 7.4.4
 
@@ -120,9 +120,9 @@ CREATE TABLE `pizza` (
 --
 
 INSERT INTO `pizza` (`idpizza`, `nome`, `ingredientes`) VALUES
-(1, 'Teste', 'Tessste, ingredientes'),
-(3, 'nome', 'ingredientes'),
-(18, 'fgdfgd', 'fgdfgdfgdfgdfg');
+(27, 'pizza 1', 'fghfghfgh'),
+(28, 'Pizza 2', 'hfghfghfg'),
+(29, 'Dtest', 'dfgdfg');
 
 -- --------------------------------------------------------
 
@@ -141,7 +141,8 @@ CREATE TABLE `tipo_pizza` (
 --
 
 INSERT INTO `tipo_pizza` (`idtipo_pizza`, `tipo`, `preco`) VALUES
-(1, 'Teste', '765756');
+(1, 'Teste', '765756'),
+(2, 'tryrtyrty', '45675');
 
 -- --------------------------------------------------------
 
@@ -153,6 +154,15 @@ CREATE TABLE `tipo_pizza_has_pizza` (
   `tipo_pizza_idtipo_pizza` int(11) NOT NULL,
   `pizza_idpizza` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Extraindo dados da tabela `tipo_pizza_has_pizza`
+--
+
+INSERT INTO `tipo_pizza_has_pizza` (`tipo_pizza_idtipo_pizza`, `pizza_idpizza`) VALUES
+(1, 27),
+(1, 28),
+(2, 29);
 
 -- --------------------------------------------------------
 
@@ -273,13 +283,13 @@ ALTER TABLE `pedido`
 -- AUTO_INCREMENT de tabela `pizza`
 --
 ALTER TABLE `pizza`
-  MODIFY `idpizza` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `idpizza` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT de tabela `tipo_pizza`
 --
 ALTER TABLE `tipo_pizza`
-  MODIFY `idtipo_pizza` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `idtipo_pizza` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de tabela `utilizador`

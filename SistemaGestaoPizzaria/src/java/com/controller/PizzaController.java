@@ -33,16 +33,15 @@ public class PizzaController {
             stmt = con.prepareStatement(insertInPizza,Statement.RETURN_GENERATED_KEYS);
             stmt.setString(1, pizzaModel.getNome());
             stmt.setString(2, pizzaModel.getIngredientes());
-            // stmt.setInt(3, pizzaModel.getTipo_pizza_idtipo_pizza());
             stmt.executeUpdate();
             rs = stmt.getGeneratedKeys();
             while (rs.next()) {
                 pizzaId = rs.getInt(1);
                 if(pizzaId > 0){
-                    String insertInTipo_pizza_has_pizza = "insert into tipo_pizza_has_pizza (tipo_pizza_idtipo_pizza,pizza_idpizza) values (?,?);";
+                    String insertInTipo_pizza_has_pizza = "insert into tipo_pizza_has_pizza (pizza_idpizza,tipo_pizza_idtipo_pizza) values (?,?);";
                     stmt = con.prepareStatement(insertInTipo_pizza_has_pizza);
                     stmt.setInt(1, pizzaId);
-                    stmt.setInt(2, 2);
+                    stmt.setInt(2, pizzaModel.getTipo_pizza_idtipo_pizza());
                     stmt.executeUpdate();
                 }
             }
@@ -63,13 +62,19 @@ public class PizzaController {
         
          try {
             
-            stmt = con.prepareStatement("update pizza set nome=?, ingredientes=? , tipo_pizza_idtipo_pizza = ? where idpizza =?");
+            String updatePizza = "update pizza set nome=?, ingredientes=? where idpizza =?";
+            stmt = con.prepareStatement(updatePizza);
             stmt.setString(1, pizzaModel.getNome());
             stmt.setString(2, pizzaModel.getIngredientes());
-            stmt.setInt(3, pizzaModel.getTipo_pizza_idtipo_pizza());
-            stmt.setInt(4, id);
-
+            stmt.setInt(3, id);
             stmt.executeUpdate();
+            
+            String updateHasTipo ="update tipo_pizza_has_pizza set tipo_pizza_idtipo_pizza=? where pizza_idpizza=?";
+            stmt = con.prepareStatement(updateHasTipo);
+            stmt.setInt(1, pizzaModel.getTipo_pizza_idtipo_pizza());
+            stmt.setInt(2, id);
+            stmt.executeUpdate();
+            
             // JOptionPane.showMessageDialog(null, "Funcionário Editado com sucesso");
          }catch(SQLException ex){
             // JOptionPane.showMessageDialog(null, "Erro ao editar "+ex); 
@@ -85,10 +90,17 @@ public class PizzaController {
         
          try {
             
-            stmt = con.prepareStatement("delete from pizza where idpizza=?");
+            String deleteFromHasTabele = " delete from tipo_pizza_has_pizza where pizza_idpizza = ?";
+            stmt = con.prepareStatement(deleteFromHasTabele);
             stmt.setInt(1, id);
-
             stmt.executeUpdate();
+            
+            String deletePizza = "delete  from pizza where idpizza=?";
+            stmt = con.prepareStatement(deletePizza);
+            stmt.setInt(1, id);
+            stmt.executeUpdate();
+            
+            
             // JOptionPane.showMessageDialog(null, "Funcionário Eliminado com sucesso");
          }catch(SQLException ex){
             // JOptionPane.showMessageDialog(null, "Erro ao editar "+ex); 
@@ -105,7 +117,7 @@ public class PizzaController {
         ResultSet rs = null;
         
         ArrayList<PizzaModel> list = new ArrayList<>();
-        String sql = "select distinct p.idpizza, p.nome, p.ingredientes, tPizza.tipo ,tPizza.preco from pizza as p  inner join tipo_pizza as tPizza";
+        String sql = "select distinct p.idpizza, p.nome, p.ingredientes, tPizza.tipo ,tPizza.preco from pizza as p join tipo_pizza_has_pizza as tHasp join tipo_pizza as tPizza on tHasp.pizza_idpizza = p.idpizza and tHasp.tipo_pizza_idtipo_pizza = tPizza.idtipo_pizza";
         try {
             Connection con = ConnectionEntity.openConection();
             stmt = con.prepareStatement(sql);
@@ -124,7 +136,7 @@ public class PizzaController {
         return list;
     }
     
-    public PizzaModel getTipoPizzaById(int id) throws SQLException {
+    public PizzaModel getPizzaById(int id) throws SQLException {
         
         Connection con = ConnectionEntity.openConection();
         PreparedStatement stmt = null;

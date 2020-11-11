@@ -52,6 +52,18 @@
         <servlet-name>EditTipoPizza</servlet-name>
         <servlet-class>com.servlets.EditTipoPizza</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>DeletePizza</servlet-name>
+        <servlet-class>com.servlets.DeletePizza</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EditPizza</servlet-name>
+        <servlet-class>com.servlets.EditPizza</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>GetPizza</servlet-name>
+        <servlet-class>com.servlets.GetPizza</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/LoginServlet</url-pattern>
@@ -103,6 +115,18 @@
     <servlet-mapping>
         <servlet-name>EditTipoPizza</servlet-name>
         <url-pattern>/EditTipoPizza</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeletePizza</servlet-name>
+        <url-pattern>/DeletePizza</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditPizza</servlet-name>
+        <url-pattern>/EditPizza</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GetPizza</servlet-name>
+        <url-pattern>/GetPizza</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
